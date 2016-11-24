@@ -13,17 +13,14 @@ class Question(models.Model):
     text = models.TextField()                                                   
     added_at = models.DateTimeField(blank=True, auto_now_add=True) 
     rating = models.IntegerField(default = 0) 
-    author = models.ForeignKey(User) 
-    likes = models.ManytoManyField(User, through="Likes")
+    author = models.ForeignKey(User, default='x') 
+    likes = models.ManyToManyField(User)
 
 
-class Likes(models.Model):
-    question = models.ForeignKey(Question, related_name="like_question")
-    user = models.ForeignKey(User, related_name="like_user")
                                                                                 
 class Answer(models.Model):                                                     
     text = models.TextField() 
-    added_at = models.DateTimeField(blank=True) 
+    added_at = models.DateTimeField(blank=True, auto_now_add=True) 
     question = models.ForeignKey(Question) 
     author = models.ForeignKey(User)
 
